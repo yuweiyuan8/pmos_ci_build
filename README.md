@@ -7,8 +7,9 @@ PostmarketOS rootfs build ci in GitHub
 - xiaomi-raphael
 - xiaomi-lmi(Not add upstream yet)
 
-> **Note**
-> Note: This root is not working stably at the moment.
+> [!NOTE]
+> 
+> This root is not working stably at the moment.
 
 ## How to flash
 - Make sure install [TWRP](https://twrp.me) first
@@ -18,8 +19,9 @@ PostmarketOS rootfs build ci in GitHub
 - Run adb sideload
 - Reboot and have fun in linux
 
-> **Warning**
-> Warning: Before flashing in, please back up important data on your phone!
+> [!IMPORTANT]
+> 
+> Before flashing in, please back up important data on your phone!
 
 ## License
 GPL-3.0 license

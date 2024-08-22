@@ -2,6 +2,8 @@ name: Build rootfs
 
 on:
   push:
+  workflow_dispatch:
+  pull_request:
 
 jobs:
   build:
@@ -30,9 +32,19 @@ jobs:
         run: yes '123456' | ./pmbootstrap/pmbootstrap.py install --android-recovery-zip --recovery-install-partition=data
 
       - name: Export rootfs
+        if: github.event_name == 'workflow_dispatch'
         run: ./pmbootstrap/pmbootstrap.py export
 
+      - name: Upload log
+        if: error
+        uses: actions/upload-artifact@v4
+        with:
+          name: log
+          path: /home/runner/.var/local/pmbootstrap/log.txt
+
+
       - name: Upload rootfs
+        if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: rootfs

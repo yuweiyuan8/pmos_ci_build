@@ -1,7 +1,7 @@
 PostmarketOS rootfs build ci in GitHub
 ======
 [![](https://img.shields.io/github/actions/workflow/status/sekaimoe/pmos_ci_build/main.yml?style=for-the-badge&color=fee4d0&logo=githubactions&logoColor=fee4d0)](https://github.com/sekaimoe/pmos_ci_build/actions/workflows/main.yml)
-[![](https://img.shields.io/github/license/sekaimor/pmos_ci_build?style=for-the-badge&color=fee4d0&logo=apache&logoColor=fee4d0)](https://github.com/sekaimoe/pmos_ci_build/blob/main/LICENSE)
+[![](https://img.shields.io/github/license/sekaimoe/pmos_ci_build?style=for-the-badge&color=fee4d0&logo=apache&logoColor=fee4d0)](https://github.com/sekaimoe/pmos_ci_build/blob/main/LICENSE)
 
 ## Supported device
 - xiaomi-raphael

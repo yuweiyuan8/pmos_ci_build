@@ -13,7 +13,7 @@ jobs:
       contents: write
     steps:
       - name: Install dep
-        run: apt install git python3-pip dpkg-dev -y
+        run: apt update && apt install git python3-pip dpkg-dev -y
       - uses: actions/checkout@v4
       - name: Pull pmbootstrap
         run: |

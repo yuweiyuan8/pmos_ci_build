@@ -29,11 +29,11 @@ jobs:
            #printf "%s\n" "edge" "xiaomi" "raphael" "user" "xfce4" "n" "none" "en_US" "xiaomi-raphael" "y" | ./pmbootstrap/pmbootstrap.py -q init
 
       - name: Build rootfs
-        run: yes '123456' | ./pmbootstrap/pmbootstrap.py install --android-recovery-zip --recovery-install-partition=data
+        run: yes '123456' | ./pmbootstrap/pmbootstrap.py --details-to-stdout install --android-recovery-zip --recovery-install-partition=data
 
       - name: Export rootfs
         if: github.event_name == 'workflow_dispatch'
-        run: ./pmbootstrap/pmbootstrap.py export
+        run: ./pmbootstrap/pmbootstrap.py --details-to-stdout export
 
       - name: Upload log
         if: failure()

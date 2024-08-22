@@ -8,7 +8,6 @@ PostmarketOS rootfs build ci in GitHub
 - xiaomi-lmi(Not add upstream yet)
 
 > **Note**
->
 > Note: This root is not working stably at the moment.
 
 ## How to flash
@@ -18,8 +17,8 @@ PostmarketOS rootfs build ci in GitHub
 - Download zip for your device
 - Run adb sideload
 - Reboot and have fun in linux
+
 > **Warning**
->
 > Warning: Before flashing in, please back up important data on your phone!
 
 ## License

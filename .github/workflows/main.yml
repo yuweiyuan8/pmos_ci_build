@@ -36,7 +36,7 @@ jobs:
         run: ./pmbootstrap/pmbootstrap.py export
 
       - name: Upload log
-        if: error
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: log

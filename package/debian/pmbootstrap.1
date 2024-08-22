@@ -1,0 +1,170 @@
+.TH PMBOOTSTRAP 1
+.SH NAME
+pmbootstrap \- Develop and install postmarketOS
+.SH SYNOPSIS
+.B pmbootstrap
+[\fIoptions\fR] \fIaction\fR
+.SH DESCRIPTION
+.B pmbootstrap
+is the central tool used in the development and installation of postmarketOS.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help\fR
+Show the built-in help message and exit.
+.TP
+.BR \-V ", " \-\-version\fR
+Show pmbootstrap's version number and exit.
+.TP
+.BR \-c ", " \-\-config\fR " " \fIconfig\fR
+Specify path to pmbootstrap.cfg file; defaults to \fI~/.config\fR.
+.TP
+\fB\-\-config-channels\fR \fIchannels\fR
+Specify path to channels.cfg, which is by default read from the master
+branch of pmaports.git.
+.TP
+.BR \-mp ", " \-\-mirror-pmOS\fR " " \fIURL\fR
+Specify postmarketOS mirror to use. Can be disabled with \fB\-mp=''\fR.
+Multiple mirrors can be specified with \fB\-mp='\fIone\fB' \-mp='\fItwo\fB'\fR.
+The default value is \fIhttp://mirror.postmarketos.org/postmarketos\fR.
+.TP
+.BR \-m ", " \-\-mirror-alpine\fR " " \fIURL\fR
+Specify Alpine Linux mirror to use. The default value is
+\fIhttp://dl-cdn.alpinelinux.org/alpine\fR.
+.TP
+.BR \-j ", " \-\-jobs\fR " " \fIjobs\fR
+Specify number of parallel jobs to use when compiling.
+.TP
+.BR \-E ", " \-\-extra-space\fR " " \fIspace\fR
+Specify an integer with the amount of additional space to allocate to
+the image, in MB (default 0).
+.TP
+.BR \-B ", " \-\-boot-size\fR " " \fIsize\fR
+Specify the boot partition size on target machine in MB (default 128).
+.TP
+.BR \-p ", " \-\-aports\fR " " \fIaports\fR
+Specify the path to postmarketOS aports (pmaports).
+.TP
+.BR \-t ", " \-\-timeout\fR " " \fItime\fR
+Specify the seconds after which hung processes get killed (default 900).
+.TP
+.BR \-w ", " \-\-work\fR " " \fIwork\fR
+Specify the folder where all data gets stored (chroots, caches, built
+packages, etc).
+.TP
+.BR \-y ", " \-\-assume-yes\fR
+Assume 'yes' to all question prompts.
+.TP
+.B \-\-as-root
+Allow running as root. This is not recommended, as it may screw up the
+work folder's directory permissions.
+.TP
+.BR \-o ", " \-\-offline\fR
+Do not attempt to update the package index files.
+.TP
+.B \-\-no-ccache
+Do not cache the compiled output.
+.TP
+.B \-\-no-cross
+Disable cross compiler; build only with QEMU and gcc.
+.TP
+.BR \-l ", " \-\-log\fR " " \fIlog\fR
+Specify path to log file.
+.TP
+.B \-\-details-to-stdout
+Print details (e.g. build output) to stdout instead of writing to the log.
+.TP
+.BR \-v ", " \-\-verbose\fR
+Write even more information to the log files.
+.TP
+.BR \-q ", " \-\-quiet\fR
+Do not output any log messages.
+.SH ACTIONS
+.TP
+.B init
+Initialize the config file.
+.TP
+.B shutdown
+Shut down active chroots (unmount them and unregister QEMU binfmt).
+.TP
+.B index
+Re-index all repositories with custom-built packages.
+.TP
+.B work_migrate
+Migrate the work folder version.
+.TP
+.B kconfig
+Change or edit kernel configs.
+.TP
+.B export
+Create convenience symlinks to generated image files (system, kernel,
+initramfs, boot.img, etc).
+.TP
+.B sideload
+Push packages to a running phone connected over USB or WiFi.
+.TP
+.B netboot
+Launch an nbd server with the postmarketOS rootfs.
+.TP
+.B flasher
+Flash something to the target device.
+.TP
+.B initramfs
+Do something with the initramfs.
+.TP
+.B pkgrel_bump
+Increase the pkgrel to indicate that a package must be rebuilt because
+of a dependency change.
+.TP
+.B aportupgrade
+Check for outdated packages that need upgrading.
+.TP
+.B newapkbuild
+Get a template to package new software.
+.TP
+.B lint
+Run quality checks on pmaports (required to pass CI).
+.TP
+.B status
+Get a quick health check for the work dir.
+.TP
+.B log
+Follow the pmbootstrap log file.
+.TP
+.B zap
+Safely delete chroot folders.
+.TP
+.B stats
+Show ccache stats.
+.TP
+.B update
+Update all existing APKINDEX files.
+.TP
+.B build_init
+Initialize the build environment.
+.TP
+.B chroot
+Start a shell in a chroot.
+.TP
+.B install
+Set up a device specific chroot and install to an SD card or image file.
+.TP
+.B checksum
+Update aport checksums.
+.TP
+.B aportgen
+Generate a postmarketOS-specific package build recipe (aport/APKBUILD).
+.TP
+.B build
+Build a package for a specific architecture.
+.TP
+.B config
+Get and set pmbootstrap options.
+.TP
+.B bootimg_analyze
+Extract all the information from an existing boot.img.
+.TP
+.B pull
+Update all git repositories that pmbootstrap cloned.
+.TP
+.B ci
+Run continuous integration scripts locally of git repo in current directory.

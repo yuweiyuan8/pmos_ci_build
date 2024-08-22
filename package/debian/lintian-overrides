@@ -1,0 +1,3 @@
+# These are text files, not documentation. They are necessary for
+# pmbootstrap to function.
+package-contains-documentation-outside-usr-share-doc

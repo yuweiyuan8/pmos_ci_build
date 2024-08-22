@@ -22,7 +22,7 @@ jobs:
           
       - name: Initialize pmbootstrap
         run: |
-           sudo aria2c  https://github.com/dpkg123/test_actions/raw/main/pmbootstrap_v3.cfg
+           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/raphael/pmbootstrap_v3.cfg
            sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
            sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
            yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init

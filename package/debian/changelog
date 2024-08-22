@@ -1,0 +1,75 @@
+pmbootstrap (2.2.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 2.2.1 (Fixes: #1065637)
+  * Point d/watch to new source
+
+ -- Vivek K J <vivekkj@disroot.org>  Fri, 05 Apr 2024 19:14:47 +0530
+
+pmbootstrap (2.1.0-1) unstable; urgency=medium
+
+  * New upstream version
+  * Add egg-info to clean target (Fixes: #1048249)
+
+ -- Ben Westover <me@benthetechguy.net>  Thu, 07 Dec 2023 16:18:20 -0500
+
+pmbootstrap (2.0.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Sun, 06 Aug 2023 19:10:10 -0400
+
+pmbootstrap (1.53.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Fri, 19 May 2023 10:24:12 -0400
+
+pmbootstrap (1.52.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Thu, 20 Apr 2023 22:48:24 -0400
+
+pmbootstrap (1.51.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Sun, 05 Mar 2023 21:48:24 -0500
+
+pmbootstrap (1.50.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Mon, 12 Dec 2022 17:18:16 -0500
+
+pmbootstrap (1.50.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Mon, 21 Nov 2022 17:04:16 -0500
+
+pmbootstrap (1.49.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Sat, 12 Nov 2022 21:52:12 -0500
+
+pmbootstrap (1.48.0-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Ben Westover <me@benthetechguy.net>  Sun, 30 Oct 2022 15:54:45 -0400
+
+pmbootstrap (1.46.0-2) unstable; urgency=medium
+
+  * Source-only upload for migration to testing
+  * Update email
+
+ -- Ben Westover <me@benthetechguy.net>  Sun, 02 Oct 2022 16:46:04 -0400
+
+pmbootstrap (1.46.0-1) experimental; urgency=medium
+
+  * Initial Package (Closes: #1001907)
+
+ -- Ben Westover <kwestover.kw@gmail.com>  Sun, 18 Sep 2022 12:32:34 -0400

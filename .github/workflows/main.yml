@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-rootfs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -49,3 +49,30 @@ jobs:
         with:
           name: rootfs
           path: /tmp/postmarketOS-export/*
+
+
+  build-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Setup pmbootstrap
+        run: |
+          git clone https://gitlab.com/postmarketOS/pmbootstrap --depth=1
+          cd pmbootstrap
+          chmod +x pmbootstrap.py
+          
+      - name: Initialize pmbootstrap
+        run: |
+           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/raphael/pmbootstrap_v3.cfg
+           sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
+           sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
+           yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
+      - name: Build device package
+        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-xiaomi-raphael --force
+
+      - name: Build firmware package
+        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-xiaomi-raphael --force
+
+      - name: Build linux package
+        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-xiaomi-raphael --force

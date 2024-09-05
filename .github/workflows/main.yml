@@ -9,6 +9,14 @@ on:
       devicesrc:
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      device:
+        required: true
+        type: string
+      devicesrc:
+        required: true
+        type: string
 
 jobs:
   build:

@@ -28,7 +28,7 @@ jobs:
         run: |
           git clone https://gitlab.com/postmarketOS/pmbootstrap --depth=1
           cd pmbootstrap
-          chmod +x pmbootstrap.py
+          chmod +x -v pmbootstrap.py
 
       - name: First Initialize pmbootstrap
         run: |
@@ -38,7 +38,7 @@ jobs:
         run: |
           if [ ! -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
               git clone ${{ inputs.devicesrc }} $HOME/tmp
-              sudo mv $HOME/tmp/* /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing
+              sudo mv -v $HOME/tmp/* /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing
               echo "file_changed=true" >> $GITHUB_ENV
           else
               echo "file_changed=false" >> $GITHUB_ENV
@@ -46,8 +46,8 @@ jobs:
 
       - name: Initialize pmbootstrap with selected device
         run: |
-           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/${{ inputs.device }}/pmbootstrap_v3.cfg
-           sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
+           sudo aria2c https://github.com/sekaimoe/pmos_ci_build/raw/main/device/${{ inputs.device }}/pmbootstrap_v3.cfg
+           sudo mv -v pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
            sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
            yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
 
@@ -55,21 +55,21 @@ jobs:
         if: env.file_changed == 'true'
         run: |
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
-               ./pmbootstrap/pmbootstrap.py checksum linux-${{ inputs.device}}
-               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-${{ inputs.device}} --force
+               ./pmbootstrap/pmbootstrap.py --details-to-stdout checksum linux-${{ inputs.device}}
+               ./pmbootstrap/pmbootstrap.py --details-to-stdout build linux-${{ inputs.device}} --force
           fi
 
       - name: Build device package
         if: env.file_changed == 'true'
         run: |
-           ./pmbootstrap/pmbootstrap.py checksum device-${{ inputs.device}}
-           ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-${{ inputs.device}} --force
+           ./pmbootstrap/pmbootstrap.py --details-to-stdout checksum device-${{ inputs.device}}
+           ./pmbootstrap/pmbootstrap.py --details-to-stdout build device-${{ inputs.device}} --force
 
       - name: Build firmware package
         if: env.file_changed == 'true'
         run: |
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/firmware-${{ inputs.device }} ]; then
-              ./pmbootstrap/pmbootstrap.py checksum firmware-${{ inputs.device}}
+              ./pmbootstrap/pmbootstrap.py --details-to-stdout checksum firmware-${{ inputs.device}}
               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-${{ inputs.device}} --force
           fi
 

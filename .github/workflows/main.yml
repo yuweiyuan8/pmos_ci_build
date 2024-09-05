@@ -42,6 +42,15 @@ jobs:
            sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
            sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
            yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
+
+      - name: Build linux package
+        if: env.file_changed == 'true'
+        run: |
+          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
+               ./pmbootstrap/pmbootstrap.py checksum linux-${{ inputs.device}}
+               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-${{ inputs.device}} --force
+          fi
+
       - name: Build device package
         if: env.file_changed == 'true'
         run: |
@@ -54,14 +63,6 @@ jobs:
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/firmware-${{ inputs.device }} ]; then
               ./pmbootstrap/pmbootstrap.py checksum firmware-${{ inputs.device}}
               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-${{ inputs.device}} --force
-          fi
-
-      - name: Build linux package
-        if: env.file_changed == 'true'
-        run: |
-          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
-               ./pmbootstrap/pmbootstrap.py checksum linux-${{ inputs.device}}
-               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-${{ inputs.device}} --force
           fi
 
       - name: Build rootfs

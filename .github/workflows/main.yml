@@ -28,8 +28,8 @@ jobs:
 
       - name: Find package
         run: |
-          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
-              git clone ${{ inputs.deviceurl }} $HOME/tmp
+          if [ ! -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
+              git clone ${{ inputs.devicesrc }} $HOME/tmp
               sudo mv $HOME/tmp/* /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing
               echo "file_changed=true" >> $GITHUB_ENV
           else

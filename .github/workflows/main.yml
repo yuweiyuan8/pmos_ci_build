@@ -44,12 +44,15 @@ jobs:
            yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
       - name: Build device package
         if: env.file_changed == 'true'
-        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-${{ inputs.device}} --force
+        run: |
+           ./pmbootstrap/pmbootstrap.py checksum device-${{ inputs.device}}
+           ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-${{ inputs.device}} --force
 
       - name: Build firmware package
         if: env.file_changed == 'true'
         run: |
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/firmware-${{ inputs.device }} ]; then
+              ./pmbootstrap/pmbootstrap.py checksum firmware-${{ inputs.device}}
               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-${{ inputs.device}} --force
           fi
 
@@ -57,6 +60,7 @@ jobs:
         if: env.file_changed == 'true'
         run: |
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
+               ./pmbootstrap/pmbootstrap.py checksum linux-${{ inputs.device}}
                ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-${{ inputs.device}} --force
           fi
 

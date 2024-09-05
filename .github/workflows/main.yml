@@ -1,4 +1,4 @@
-name: Build rootfs
+name: Job
 
 on:
   workflow_call:

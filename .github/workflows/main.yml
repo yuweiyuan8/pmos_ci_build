@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: log
-          path: /home/runner/.var/local/pmbootstrap/log.txt
+          path: /home/runner/.local/var/pmbootstrap/log.txt
 
 
       - name: Upload rootfs

@@ -1,0 +1,19 @@
+name: Build rootfs
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - device: xiaomi-lmi
+            devicesrc: https://github.com/NekoSekaiMoe/pmos_xiaomi_lmi
+          - device: xiaomi-raphael
+
+    uses: ./.github/workflows/main.yml
+    secrets: inherit
+    with:
+      device: ${{ matrix.device }}
+      devicesrc: ${{ matrix.devicesrc }}

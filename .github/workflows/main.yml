@@ -1,32 +1,63 @@
 name: Build rootfs
 
 on:
-  push:
-  workflow_dispatch:
-  pull_request:
+  workflow_call:
+    inputs:
+      device:
+        required: true
+        type: string
+      devicesrc:
+        required: true
+        type: string
 
-jobs:
-  build-rootfs:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Setup pmbootstrap
         run: |
-          #sudo mv -v pmaports /home/runner/
           git clone https://gitlab.com/postmarketOS/pmbootstrap --depth=1
           cd pmbootstrap
           chmod +x pmbootstrap.py
-          #sudo rm /usr/bin/pmbootstrap
-          #sudo ln -sfv ./pmbootstrap.py /usr/bin/pmbootstrap
-          
-      - name: Initialize pmbootstrap
+
+      - name: First Initialize pmbootstrap
         run: |
-           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/raphael/pmbootstrap_v3.cfg
+           yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
+
+      - name: Find package
+        run: |
+          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
+              git clone ${{ inputs.deviceurl }} $HOME/tmp
+              sudo mv $HOME/tmp/* /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing
+              echo "file_changed=true" >> $GITHUB_ENV
+          else
+              echo "file_changed=false" >> $GITHUB_ENV
+          fi
+
+      - name: Initialize pmbootstrap with selected device
+        run: |
+           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/${{ inputs.device }}/pmbootstrap_v3.cfg
            sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
            sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
            yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
-           #printf "%s\n" "edge" "xiaomi" "raphael" "user" "xfce4" "n" "none" "en_US" "xiaomi-raphael" "y" | ./pmbootstrap/pmbootstrap.py -q init
+      - name: Build device package
+        if: env.file_changed == 'true'
+        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-${{ inputs.device}} --force
+
+      - name: Build firmware package
+        if: env.file_changed == 'true'
+        run: |
+          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/firmware-${{ inputs.device }} ]; then
+              ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-${{ inputs.device}} --force
+          fi
+
+      - name: Build linux package
+        if: env.file_changed == 'true'
+        run: |
+          if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-${{ inputs.device }} ]; then
+               ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-${{ inputs.device}} --force
+          fi
 
       - name: Build rootfs
         run: yes '123456' | ./pmbootstrap/pmbootstrap.py --details-to-stdout install --android-recovery-zip --recovery-install-partition=data
@@ -49,30 +80,3 @@ jobs:
         with:
           name: rootfs
           path: /tmp/postmarketOS-export/*
-
-
-  build-package:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Setup pmbootstrap
-        run: |
-          git clone https://gitlab.com/postmarketOS/pmbootstrap --depth=1
-          cd pmbootstrap
-          chmod +x pmbootstrap.py
-          
-      - name: Initialize pmbootstrap
-        run: |
-           sudo aria2c  https://github.com/sekaimoe/pmos_ci_build/raw/main/device/raphael/pmbootstrap_v3.cfg
-           sudo mv pmbootstrap_v3.cfg -v /home/runner/.config/pmbootstrap_v3.cfg
-           sudo chmod 777 -v /home/runner/.config/pmbootstrap_v3.cfg
-           yes '' | ./pmbootstrap/pmbootstrap.py --details-to-stdout init
-      - name: Build device package
-        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build device-xiaomi-raphael --force
-
-      - name: Build firmware package
-        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build firmware-xiaomi-raphael --force
-
-      - name: Build linux package
-        run: ./pmbootstrap/pmbootstrap.py  --details-to-stdout build linux-xiaomi-raphael --force

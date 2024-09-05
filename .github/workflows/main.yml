@@ -1,4 +1,4 @@
-name: Job
+name: Build rootfs / package
 
 on:
   workflow_call:
@@ -10,7 +10,8 @@ on:
         required: true
         type: string
 
-  job:
+jobs:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write

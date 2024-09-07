@@ -26,14 +26,14 @@ jobs:
     steps:
       - name: Clean up disk space 
         run: |              
-             df -hs
+             df -h
              sudo rm -rf -v /usr/share/dotnet 
              sudo rm -rf -v /usr/local/lib/android 
              sudo rm -rf -v /opt/ghc 
              sudo rm -rf -v /opt/hostedtoolcache/CodeQL 
              sudo docker image prune --all --force
              sudo rm -rf -v /home/linuxbrew
-             df -hs
+             df -h
       - name: Setup pmbootstrap
         run: |
           git clone https://gitlab.com/postmarketOS/pmbootstrap --depth=1

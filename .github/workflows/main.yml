@@ -27,12 +27,12 @@ jobs:
       - name: Clean up disk space 
         run: |              
              df -h
-             sudo rm -rf -v /usr/share/dotnet 
-             sudo rm -rf -v /usr/local/lib/android 
-             sudo rm -rf -v /opt/ghc 
-             sudo rm -rf -v /opt/hostedtoolcache/CodeQL 
+             sudo rm -rf /usr/share/dotnet 
+             sudo rm -rf /usr/local/lib/android 
+             sudo rm -rf /opt/ghc 
+             sudo rm -rf /opt/hostedtoolcache/CodeQL 
              sudo docker image prune --all --force
-             sudo rm -rf -v /home/linuxbrew
+             sudo rm -rf /home/linuxbrew
              df -h
       - name: Setup pmbootstrap
         run: |

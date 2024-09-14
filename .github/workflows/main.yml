@@ -84,7 +84,7 @@ jobs:
           fi
 
       - name: Build rootfs
-        run: yes '123456' | ./pmbootstrap/pmbootstrap.py --details-to-stdout install --android-recovery-zip --recovery-install-partition=data
+        run: yes '123456' | ./pmbootstrap/pmbootstrap.py --details-to-stdout install --android-recovery-zip --recovery-install-partition=linux
 
       - name: Export rootfs
         if: github.event_name == 'workflow_dispatch'

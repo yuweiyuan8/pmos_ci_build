@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - device: xiaomi-lmi
-            devicesrc: https://github.com/NekoSekaiMoe/pmos_xiaomi_lmi
+            devicesrc: https://github.com/yuweiyuan8/pmos_xiaomi_lmi
           - device: xiaomi-raphael
 
     uses: ./.github/workflows/main.yml

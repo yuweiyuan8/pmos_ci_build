@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - device: xiaomi-lmi
+          - device: oneplus-hotdog
             devicesrc: https://github.com/yuweiyuan8/pmaports.git
           - device: xiaomi-raphael
 

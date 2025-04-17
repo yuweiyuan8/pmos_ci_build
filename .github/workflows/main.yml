@@ -40,6 +40,7 @@ jobs:
               git clone ${{ inputs.devicesrc }} $HOME/pmaports
               sudo rm -rf /home/runner/.local/var/pmbootstrap/cache_git/pmaports/*
               sudo cp -rf $HOME/pmaports/* /home/runner/.local/var/pmbootstrap/cache_git/pmaports/
+              sudo chmod -R 777 /home/runner/.local/var/pmbootstrap/cache_git/pmaports/
               echo "file_changed=true" >> $GITHUB_ENV
           else
               echo "file_changed=false" >> $GITHUB_ENV

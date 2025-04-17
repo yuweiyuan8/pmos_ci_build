@@ -57,8 +57,8 @@ jobs:
         if: env.file_changed == 'true'
         run: |
           if [ -d /home/runner/.local/var/pmbootstrap/cache_git/pmaports/device/testing/device-oneplus-hotdog; then
-               ./pmbootstrap/pmbootstrap.py --details-to-stdout checksum linux-oneplus-hotdog
-               ./pmbootstrap/pmbootstrap.py --details-to-stdout build linux-oneplus-hotdog --force
+               ./pmbootstrap/pmbootstrap.py --details-to-stdout checksum linux-postmarketos-qcom-sm8150
+               ./pmbootstrap/pmbootstrap.py --details-to-stdout build linux-postmarketos-qcom-sm8150 --force
           fi
 
       - name: Build device package
